@@ -1,6 +1,5 @@
 """
 Legg historisk vær på bysykkeldata (3-timers oppløsning)
-ENDELEG STABIL METEOSTAT-VERSJON
 """
 
 import pandas as pd
@@ -14,10 +13,11 @@ config.block_large_requests = False
 # ---------------------------------------
 
 INPUT_FILE = "bysykkel_prophet_features_3h.csv"
-OUTPUT_FILE = "bysykkel_prophet_features_3h_weather.csv"
+OUTPUT_FILE = "bysykkel_prophet_features_3h_weather_hois.csv"
 
 # Fast Meteostat-stasjon: Trondheim – Voll
-STATION_ID = "01415"
+#STATION_ID = "01415"
+STATION_ID = "01257"
 
 # ---------------------------------------
 # 1. LES BYSYKKELDATA
