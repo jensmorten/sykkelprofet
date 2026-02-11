@@ -285,3 +285,5 @@ data/trondheimbysykkel_csv/trips_2025_08.csv
 data/trondheimbysykkel_csv/trips_2025_09.csv
 data/trondheimbysykkel_csv/trips_2025_10.csv
 data/trondheimbysykkel_csv/trips_2025_11.csv
+data/test_target_secret.csv
+konkurranse/test_target_secret.csv
