@@ -38,7 +38,7 @@ plt.figure(figsize=(12, 5))
 plt.plot(df["ds"], df["y"], label="Faktisk", linewidth=2)
 plt.plot(df["ds"], df["yhat"], label="Predikert", linewidth=2)
 
-plt.title(f"Faktisk vs Predikert\nRMSE: {rmse:.2f}")
+plt.title(f"Faktisk vs Predikert av {SUBMISSION_FILE} \nRMSE: {rmse:.2f}")
 plt.xlabel("Dato")
 plt.ylabel("Antall turer")
 plt.legend()
