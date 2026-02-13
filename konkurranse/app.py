@@ -15,14 +15,14 @@ from pathlib import Path
 #TARGET_FILE = "test_target_secret.csv"
 LEADERBOARD_FILE = "leaderboard.csv"
 
-st.title("🚲 Prophet-konkurranse – Bysykkel")
+st.title("🚲 Bli sykkelprofet i egen by! ")
 
 # --------------------------------------------------
 # VIS LEADERBOARD ALLTID
 # --------------------------------------------------
 
 st.subheader("🏆 Leaderboard ")
-st.markdown("laveste RMSE vinnner")
+st.markdown("Laveste RMSE vinnner")
 
 if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
