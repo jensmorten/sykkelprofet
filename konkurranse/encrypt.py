@@ -15,4 +15,3 @@ with open("test_target_secret_encrypted.bin", "wb") as f:
     f.write(encrypted)
 
 print("✅ Kryptert og lagret som test_target_secret_encrypted.bin")
-lIkg0T0mWUBHyKLQFzAiZj6XEyWsJtUxTjGIufIhUfc=

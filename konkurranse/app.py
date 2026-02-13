@@ -10,7 +10,7 @@ from cryptography.fernet import Fernet
 # KONFIG
 # --------------------------------------------------
 
-TARGET_FILE = "test_target_secret.csv"
+#TARGET_FILE = "test_target_secret.csv"
 LEADERBOARD_FILE = "leaderboard.csv"
 
 st.title("🚲 Prophet-konkurranse – Bysykkel")
