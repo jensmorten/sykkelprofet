@@ -21,7 +21,7 @@ st.title("🚲 Prophet-konkurranse – Bysykkel")
 # VIS LEADERBOARD ALLTID
 # --------------------------------------------------
 
-st.subheader("🏆 Leaderboard")
+st.subheader("🏆 Leaderboard (laveste RMSE vinnner!)")
 
 if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
@@ -81,7 +81,7 @@ y_true = pd.read_csv(io.BytesIO(decrypted), parse_dates=["ds"])
 # OPPLASTING
 # --------------------------------------------------
 
-st.subheader("📤 Last opp submission")
+st.subheader("📤 Last opp innlevering")
 
 uploaded_file = st.file_uploader(
     "Last opp submission.csv",
@@ -155,3 +155,21 @@ if uploaded_file and team_name:
             leaderboard.to_csv(LEADERBOARD_FILE, index=False)
 
             st.rerun()
+
+st.markdown("---")
+
+with st.expander("ℹ️ Hva betyr RMSE?"):
+    st.write("""
+    **RMSE (Root Mean Squared Error)** måler hvor langt prediksjonene
+    ligger fra de faktiske verdiene.
+
+    Formel:
+
+    RMSE = √( gjennomsnitt( (faktisk − predikert)² ) )
+
+    • Lavere er bedre  
+    • Store feil straffes ekstra mye  
+    • Måles i antall turer
+
+    RMSE = 50 betyr at modellen i snitt bommer med ca 50 turer per 3-timersperiode.
+    """)
