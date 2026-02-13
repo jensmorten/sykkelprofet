@@ -21,7 +21,8 @@ st.title("🚲 Prophet-konkurranse – Bysykkel")
 # VIS LEADERBOARD ALLTID
 # --------------------------------------------------
 
-st.subheader("🏆 Leaderboard (laveste RMSE vinnner!)")
+st.subheader("🏆 Leaderboard ")
+st.markdown("laveste RMSE vinnner")
 
 if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
