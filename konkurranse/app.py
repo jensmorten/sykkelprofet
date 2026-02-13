@@ -5,6 +5,8 @@ from sklearn.metrics import root_mean_squared_error
 import os
 import io
 from cryptography.fernet import Fernet
+from pathlib import Path
+
 
 # --------------------------------------------------
 # KONFIG
@@ -48,10 +50,13 @@ else:
 # LAST FASIT
 # --------------------------------------------------
 
+BASE_DIR = Path(__file__).parent
+SECRET_FILE = BASE_DIR / "test_target_secret_encrypted.bin"
+
 key = st.secrets["ENC_KEY"].encode()
 cipher = Fernet(key)
 
-with open("test_target_secret_encrypted.bin", "rb") as f:
+with open(SECRET_FILE, "rb") as f:
     encrypted = f.read()
 
 decrypted = cipher.decrypt(encrypted)
