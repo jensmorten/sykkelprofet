@@ -140,4 +140,4 @@ if uploaded_file and team_name:
             leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
             leaderboard.to_csv(LEADERBOARD_FILE, index=False)
 
-            st.experimental_rerun()
+            st.st.rerun()
