@@ -27,7 +27,7 @@ if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
     leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
 
-    # Legg til plassering og emoji
+    # Legg til rangering med emoji
     medals = []
     for i in range(len(leaderboard)):
         if i == 0:
@@ -43,6 +43,20 @@ if os.path.exists(LEADERBOARD_FILE):
     leaderboard_display.insert(0, "Rank", medals)
 
     st.dataframe(leaderboard_display, use_container_width=True)
+
+    # ---------------------------------------------
+    # 🔽 Last ned leaderboard-knapp
+    # ---------------------------------------------
+
+    csv_data = leaderboard.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        label="⬇️ Last ned leaderboard.csv",
+        data=csv_data,
+        file_name="leaderboard.csv",
+        mime="text/csv"
+    )
+
 else:
     st.info("Ingen innleveringer enda.")
 
