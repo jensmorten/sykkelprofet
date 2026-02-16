@@ -1,4 +1,4 @@
-# sykkelprofet
+# Bli sykkelprofet i egen by!
 Bygg din egen prophet-modell!
 
 Ta gjerne utgangspunkt i notebookek "prophet_starter": https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/konkurranse/prophet_starter.ipynb
