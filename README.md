@@ -1,9 +1,11 @@
 # Bli sykkelprofet i egen by!
 Bygg din egen prophet-modell!
 
-Ta gjerne utgangspunkt i notebookek "prophet_starter": https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/konkurranse/prophet_starter.ipynb
+* Ta gjerne utgangspunkt i notebooken "prophet_starter": https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/konkurranse/prophet_starter.ipynb
 
-last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
+* Juster modellen etter eget ønske
+
+* Last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
 
 fila må inneholde to kollonner: ds og yhat. 
 ds må innholde tidstempel fra 2025-09-01 03:00:00 til 2025-09-14 21:00:00 
