@@ -5,7 +5,8 @@ Ta gjerne utgangspunkt i notebookek "prophet_starter": https://raw.githubusercon
 
 last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
 
-fila må innehalde to kollonner: ds og yhat. ds må innhelde tidstempel fra 2025-09-01 03:00:00 til 2025-09-14 21:00:00 
+fila må inneholde to kollonner: ds og yhat. 
+ds må innholde tidstempel fra 2025-09-01 03:00:00 til 2025-09-14 21:00:00 
 
 
 ---- 
