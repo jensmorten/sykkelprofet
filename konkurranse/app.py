@@ -175,8 +175,8 @@ if submit_button:
     # --------------------------------------------------
 
     new_entry = pd.DataFrame({
-    "team": [team_name],
-    "rmse": [rmse],
+    "Lagnavn": [team_name],
+    "RMSE": [rmse],
     "plot_file": [plot_filename]
     })
 
@@ -186,7 +186,7 @@ if submit_button:
     else:
         leaderboard = new_entry
 
-    leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
+    leaderboard = leaderboard.sort_values("RMSE").reset_index(drop=True)
     leaderboard.to_csv(LEADERBOARD_FILE, index=False)
 
     st.rerun()
