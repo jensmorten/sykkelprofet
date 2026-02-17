@@ -11,4 +11,4 @@ df_public = df_test.drop(columns=["y"])
 
 df_public.to_csv("test_compete.csv", index=False)
 
-print("✅ Laget test_features.csv (uten y)")
+print("✅ Laget test_compete.csv (uten y)")

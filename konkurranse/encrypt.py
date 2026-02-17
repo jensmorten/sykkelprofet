@@ -1,9 +1,9 @@
 from cryptography.fernet import Fernet
 
 
-#key = Fernet.generate_key()
-#print(key.decode())
-key = b"PASTE_KEY_HERE"
+key = Fernet.generate_key()
+print(key.decode())
+#key = b"PASTE_KEY_HERE"
 cipher = Fernet(key)
 
 with open("test_target_secret.csv", "rb") as f:
