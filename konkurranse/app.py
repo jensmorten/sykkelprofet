@@ -79,19 +79,32 @@ decrypted = cipher.decrypt(encrypted)
 y_true = pd.read_csv(io.BytesIO(decrypted), parse_dates=["ds"])
 
 # --------------------------------------------------
-# OPPLASTING
+# OPPLASTING (MED SUBMIT-KNAPP)
 # --------------------------------------------------
 
 st.subheader("📤 Last opp innlevering")
 
-uploaded_file = st.file_uploader(
-    "Last opp submission.csv",
-    type=["csv"]
-)
+with st.form("submission_form"):
 
-team_name = st.text_input("Lagnavn")
+    uploaded_file = st.file_uploader(
+        "Last opp submission.csv",
+        type=["csv"]
+    )
 
-if uploaded_file and team_name:
+    team_name = st.text_input("Lagnavn")
+
+    submit_button = st.form_submit_button("🚀 Submit")
+
+# Kjør berre når knapp trykkes
+if submit_button:
+
+    if not uploaded_file:
+        st.error("Du må laste opp en fil.")
+        st.stop()
+
+    if not team_name:
+        st.error("Du må skrive lagnavn.")
+        st.stop()
 
     y_pred = pd.read_csv(uploaded_file, parse_dates=["ds"])
 
@@ -101,61 +114,53 @@ if uploaded_file and team_name:
 
     if not {"ds", "yhat"}.issubset(y_pred.columns):
         st.error("Filen må inneholde kolonnene: ds, yhat")
+        st.stop()
+
+    df = y_true.merge(y_pred, on="ds")
+
+    if len(df) != len(y_true):
+        st.error("Feil antall rader eller mismatch på ds")
+        st.stop()
+
+    # --------------------------------------------------
+    # BEREGN RMSE
+    # --------------------------------------------------
+
+    rmse = root_mean_squared_error(df["y"], df["yhat"])
+
+    st.success(f"RMSE: {rmse:.2f}")
+
+    # --------------------------------------------------
+    # PLOTT
+    # --------------------------------------------------
+
+    fig, ax = plt.subplots(figsize=(10,4))
+    ax.plot(df["ds"], df["y"], label="Faktisk")
+    ax.plot(df["ds"], df["yhat"], label="Predikert")
+    ax.set_title(f"{team_name} – RMSE: {rmse:.2f}")
+    ax.legend()
+
+    st.pyplot(fig)
+
+    # --------------------------------------------------
+    # OPPDATER LEADERBOARD
+    # --------------------------------------------------
+
+    new_entry = pd.DataFrame({
+        "team": [team_name],
+        "rmse": [rmse]
+    })
+
+    if os.path.exists(LEADERBOARD_FILE):
+        leaderboard = pd.read_csv(LEADERBOARD_FILE)
+        leaderboard = pd.concat([leaderboard, new_entry], ignore_index=True)
     else:
+        leaderboard = new_entry
 
-        df = y_true.merge(y_pred, on="ds")
+    leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
+    leaderboard.to_csv(LEADERBOARD_FILE, index=False)
 
-        if len(df) != len(y_true):
-            st.error("Feil antall rader eller mismatch på ds")
-        else:
-
-            # --------------------------------------------------
-            # BEREGN RMSE
-            # --------------------------------------------------
-
-            rmse = root_mean_squared_error(df["y"], df["yhat"])
-
-            st.success(f"RMSE: {rmse:.2f}")
-
-            # --------------------------------------------------
-            # PLOTT
-            # --------------------------------------------------
-
-            fig, ax = plt.subplots(figsize=(10,4))
-            ax.plot(df["ds"], df["y"], label="Faktisk")
-            ax.plot(df["ds"], df["yhat"], label="Predikert")
-            ax.set_title(f"{team_name} – RMSE: {rmse:.2f}")
-            ax.legend()
-
-            st.pyplot(fig)
-
-            # --------------------------------------------------
-            # OPPDATER LEADERBOARD
-            # --------------------------------------------------
-
-            new_entry = pd.DataFrame({
-                "team": [team_name],
-                "rmse": [rmse]
-            })
-
-            if os.path.exists(LEADERBOARD_FILE):
-                leaderboard = pd.read_csv(LEADERBOARD_FILE)
-
-                # Valgfritt: berre beste score per lag
-                #if team_name in leaderboard["team"].values:
-                #    leaderboard = leaderboard[leaderboard["team"] != team_name]
-
-                leaderboard = pd.concat(
-                    [leaderboard, new_entry],
-                    ignore_index=True
-                )
-            else:
-                leaderboard = new_entry
-
-            leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
-            leaderboard.to_csv(LEADERBOARD_FILE, index=False)
-
-            st.rerun()
+    st.rerun()
 
 st.markdown("---")
 
