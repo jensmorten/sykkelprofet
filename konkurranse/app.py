@@ -48,7 +48,7 @@ if os.path.exists(LEADERBOARD_FILE):
     leaderboard_display.insert(0, "Rank", medals)
 
     st.dataframe(
-        leaderboard_display[["Rank", "team", "rmse"]],
+        leaderboard_display[["Rank", "Lagnavn", "RMSE"]],
         use_container_width=True, hide_index=True
     )
 
