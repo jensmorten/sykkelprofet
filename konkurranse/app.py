@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import root_mean_squared_error
 import os
 import io
+import time
 from cryptography.fernet import Fernet
 from pathlib import Path
 
@@ -13,7 +14,11 @@ from pathlib import Path
 # --------------------------------------------------
 
 #TARGET_FILE = "test_target_secret.csv"
-LEADERBOARD_FILE = "leaderboard.csv"
+BASE_DIR = Path(__file__).parent
+LEADERBOARD_FILE = BASE_DIR / "leaderboard.csv"
+PLOT_DIR = BASE_DIR / "plots"
+PLOT_DIR.mkdir(exist_ok=True)
+
 
 st.title("🚲 Bli sykkelprofet i egen by! ")
 
@@ -28,7 +33,6 @@ if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
     leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
 
-    # Legg til rangering med emoji
     medals = []
     for i in range(len(leaderboard)):
         if i == 0:
@@ -43,7 +47,23 @@ if os.path.exists(LEADERBOARD_FILE):
     leaderboard_display = leaderboard.copy()
     leaderboard_display.insert(0, "Rank", medals)
 
-    st.dataframe(leaderboard_display, use_container_width=True)
+    st.dataframe(
+        leaderboard_display[["Rank", "team", "rmse"]],
+        use_container_width=True
+    )
+
+    st.markdown("### 📊 Last ned plot")
+
+    for _, row in leaderboard.iterrows():
+        plot_path = PLOT_DIR / row["plot_file"]
+        if plot_path.exists():
+            with open(plot_path, "rb") as f:
+                st.download_button(
+                    label=f"Last ned plot – {row['team']}",
+                    data=f,
+                    file_name=row["plot_file"],
+                    mime="image/png"
+                )
 
     # ---------------------------------------------
     # 🔽 Last ned leaderboard-knapp
@@ -134,21 +154,30 @@ if submit_button:
     # PLOTT
     # --------------------------------------------------
 
+    timestamp = int(time.time())
+    safe_team = team_name.replace(" ", "_")
+
+    plot_filename = f"{safe_team}_{timestamp}.png"
+    plot_path = PLOT_DIR / plot_filename
+
     fig, ax = plt.subplots(figsize=(10,4))
     ax.plot(df["ds"], df["y"], label="Faktisk")
     ax.plot(df["ds"], df["yhat"], label="Predikert")
     ax.set_title(f"{team_name} – RMSE: {rmse:.2f}")
     ax.legend()
 
-    st.pyplot(fig)
+    fig.savefig(plot_path, dpi=300)
+    plt.close(fig)
+
 
     # --------------------------------------------------
     # OPPDATER LEADERBOARD
     # --------------------------------------------------
 
     new_entry = pd.DataFrame({
-        "team": [team_name],
-        "rmse": [rmse]
+    "team": [team_name],
+    "rmse": [rmse],
+    "plot_file": [plot_filename]
     })
 
     if os.path.exists(LEADERBOARD_FILE):
