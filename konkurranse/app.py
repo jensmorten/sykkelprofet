@@ -49,7 +49,7 @@ if os.path.exists(LEADERBOARD_FILE):
 
     st.dataframe(
         leaderboard_display[["Rank", "team", "rmse"]],
-        use_container_width=True
+        use_container_width=True, index=False
     )
 
     st.markdown("### 📊 Last ned plot")
