@@ -31,7 +31,7 @@ st.markdown("Laveste RMSE vinnner")
 
 if os.path.exists(LEADERBOARD_FILE):
     leaderboard = pd.read_csv(LEADERBOARD_FILE)
-    leaderboard = leaderboard.sort_values("rmse").reset_index(drop=True)
+    leaderboard = leaderboard.sort_values("RMSE").reset_index(drop=True)
 
     medals = []
     for i in range(len(leaderboard)):
