@@ -59,7 +59,7 @@ if os.path.exists(LEADERBOARD_FILE):
         if plot_path.exists():
             with open(plot_path, "rb") as f:
                 st.download_button(
-                    label=f"Last ned plot – {row['team']}",
+                    label=f"Last ned plot – {row['Lagnavn']}",
                     data=f,
                     file_name=row["plot_file"],
                     mime="image/png"
