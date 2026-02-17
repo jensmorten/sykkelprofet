@@ -142,8 +142,8 @@ if uploaded_file and team_name:
                 leaderboard = pd.read_csv(LEADERBOARD_FILE)
 
                 # Valgfritt: berre beste score per lag
-                if team_name in leaderboard["team"].values:
-                    leaderboard = leaderboard[leaderboard["team"] != team_name]
+                #if team_name in leaderboard["team"].values:
+                #    leaderboard = leaderboard[leaderboard["team"] != team_name]
 
                 leaderboard = pd.concat(
                     [leaderboard, new_entry],
