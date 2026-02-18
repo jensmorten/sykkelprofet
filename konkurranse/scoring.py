@@ -7,7 +7,7 @@ from sklearn.metrics import root_mean_squared_error
 # --------------------------------------------------
 
 TARGET_FILE = "test_target_secret.csv"
-SUBMISSION_FILE = "submission_test.csv"
+SUBMISSION_FILE = "submission_testing_long2.csv"
 
 # PNG lagres med samme navn som submission
 OUTPUT_PLOT = SUBMISSION_FILE.replace(".csv", "_score.png")
