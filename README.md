@@ -8,7 +8,7 @@ Bygg din egen prophet-modell!
 * Last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
 
 fila må inneholde to kollonner: ds og yhat. 
-ds må innholde tidstempel fra 2025-09-01 03:00:00 til 2025-09-14 21:00:00 
+ds må innholde tidstempel fra 2025-05-01 03:00:00 til 2025-09-30 21:00:00 
 
 
 ---- 
