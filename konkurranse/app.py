@@ -126,7 +126,7 @@ if submit_button:
         st.error("Du må skrive lagnavn.")
         st.stop()
 
-    y_pred = pd.read_csv(uploaded_file, parse_dates=["ds"])
+    y_pred = pd.read_csv(uploaded_file, parse_dates=["ds"], sep=',')
 
     # --------------------------------------------------
     # VALIDER FORMAT
