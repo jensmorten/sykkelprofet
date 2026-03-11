@@ -111,7 +111,7 @@ with st.form("submission_form"):
         type=["csv"]
     )
 
-    team_name = st.text_input("Lagnavn")
+    team_name = st.text_input("Deltakernavn")
 
     submit_button = st.form_submit_button("🚀 Submit")
 
@@ -123,7 +123,7 @@ if submit_button:
         st.stop()
 
     if not team_name:
-        st.error("Du må skrive lagnavn.")
+        st.error("Du må skrive deltakernavn.")
         st.stop()
 
     y_pred = pd.read_csv(uploaded_file, parse_dates=["ds"], sep=',')
