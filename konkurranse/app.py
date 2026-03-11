@@ -175,7 +175,7 @@ if submit_button:
     # --------------------------------------------------
 
     new_entry = pd.DataFrame({
-    "Lagnavn": [team_name],
+    "Navn": [team_name],
     "RMSE": [rmse],
     "plot_file": [plot_filename]
     })
