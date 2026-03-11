@@ -7,8 +7,8 @@ Bygg din egen prophet-modell!
 
 * Last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
 
-fila må inneholde to kollonner: ds og yhat. 
-ds må innholde tidstempel fra 2025-05-01 03:00:00 til 2025-09-30 21:00:00 
+fila må inneholde to kollonner: ds og yhat, separert med komma
+ds må innholde tidstempel fra 2025-05-01 03:00:00 til 2025-09-30 21:00:00 (3-timers intervall). Se eksempel på gyldig fil er: https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/konkurranse/submission_testing_w.csv
 
 
 ---- 
@@ -22,3 +22,4 @@ ds må innholde tidstempel fra 2025-05-01 03:00:00 til 2025-09-30 21:00:00
 * Skriv jupyter notebook for å starte Jupyter Notebook.
 * Velg notatboken «prophet_starter» i nettleservinduet som åpnes.
 * Velg Run → Run all cells i toppmenyen for å forsikre deg om at eksempelet fungerer.
+* Om kall til prophet feiler, må du sannsynligvis installere prophet ved å opprette ny celle og skrive %pip install prophet i denne cella
