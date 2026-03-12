@@ -7,7 +7,7 @@ Bygg din egen prophet-modell!
 
 * Last opp prediksjonen på https://sykkelprofet-konkurranse.streamlit.app/
 
-fila må inneholde to kollonner: ds og yhat, separert med komma
+fila må inneholde to kollonner: ds og yhat, separert med komma. <br>
 ds må innholde tidstempel fra 2025-05-01 03:00:00 til 2025-09-30 21:00:00 (3-timers intervall). Se eksempel på gyldig fil er: https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/konkurranse/submission_testing_w.csv
 
 
