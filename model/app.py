@@ -27,37 +27,43 @@ df = df.rename(columns={
 
 fig = go.Figure()
 
-# sykkelbruk
+# -----------------------------
+# Bysykkelturer
+# -----------------------------
 fig.add_trace(
     go.Scatter(
         x=df["ds"],
         y=df["yhat"],
         mode="lines+markers",
         name="Predikert turer",
-        line=dict(width=3)
+        line=dict(width=3, color="#1f77b4"),
     )
 )
 
-# temperatur
+# -----------------------------
+# Temperatur
+# -----------------------------
 fig.add_trace(
     go.Scatter(
         x=df["ds"],
         y=df["temp"],
         mode="lines",
-        name="Temperatur",
+        name="Temperatur (°C)",
         yaxis="y2",
-        line=dict(dash="dot")
+        line=dict(dash="dot", color="orange"),
     )
 )
 
-# nedbør
+# -----------------------------
+# Nedbør
+# -----------------------------
 fig.add_trace(
     go.Bar(
         x=df["ds"],
         y=df["rain"],
-        name="Nedbør",
-        opacity=0.3,
-        yaxis="y3"
+        name="Nedbør (mm)",
+        yaxis="y2",
+        opacity=0.4,
     )
 )
 
@@ -66,12 +72,12 @@ fig.update_layout(
     hovermode="x unified",
     xaxis_title="Tid",
     yaxis=dict(
-        title="Bysykkelturer"
+        title="Bysykkelturer",
     ),
     yaxis2=dict(
-        title="Temperatur (°C)",
+        title="Temperatur / Nedbør",
         overlaying="y",
-        side="right"
+        side="right",
     ),
 )
 
