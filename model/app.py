@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="Bysykkelprognose", layout="wide")
+st.set_page_config(page_title="Prognose for bysykkelbruk i Trondheim", layout="wide")
 
-st.title("🚲 Prognose for bysykkelbruk")
+st.title("🚲 Prognose for bysykkelbruk i Trondheim")
 
 # -----------------------------
 # LES DATA
