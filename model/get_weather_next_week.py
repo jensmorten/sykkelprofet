@@ -2,63 +2,68 @@ import pandas as pd
 from meteostat import hourly, config
 from datetime import datetime, timedelta
 
-# 🔓 Tillat lange historiske forespørsler
-config.block_large_requests = False
-
 # ---------------------------------------
 # KONFIG
 # ---------------------------------------
 
+config.block_large_requests = False
 STATION_ID = "01257"
 
-# ---------------------------------------
-# 1. set config
-# ---------------------------------------
-
 start = datetime.now()
-end = start + timedelta(weeks=1)
+end = start + timedelta(days=7)
 
-print(f"Tidsrom: {start.date()} → {end.date()}")
+print(f"Tidsrom: {start} → {end}")
 
 # ---------------------------------------
-# 2. HENT VÆRDATA (TIMEVIS)
+# HENT DATA
 # ---------------------------------------
 
-print("Henter værdata fra Meteostat …")
+print("Henter værdata fra Meteostat…")
 
-ts = hourly(STATION_ID, start, end)   # TimeSeries
-df_weather = ts.fetch()               # DataFrame
+df = hourly(STATION_ID, start, end).fetch()
 
-if df_weather is None or df_weather.empty:
+if df.empty:
     raise RuntimeError("Ingen værdata returnert fra Meteostat")
 
-df_weather = df_weather.reset_index()
-
 # ---------------------------------------
-# 3. RYDD & AGGREGER
+# RYDD
 # ---------------------------------------
 
-df_weather = df_weather.rename(columns={
-    "time": "ds",
+df = df.rename(columns={
     "temp": "air_temperature",
     "prcp": "precipitation_amount",
     "wspd": "wind_speed"
 })
 
-df_weather["ds"] = df_weather["ds"].dt.floor("3h")
+df = df[[
+    "air_temperature",
+    "wind_speed",
+    "precipitation_amount"
+]]
 
-df_weather = (
-    df_weather
-    .groupby("ds")
-    .agg({
-        "air_temperature": "mean",
-        "wind_speed": "mean",
-        "precipitation_amount": "sum"
-    })
-    .reset_index()
-)
+# ---------------------------------------
+# RESAMPLE TIL 3 TIMER
+# ---------------------------------------
 
+df = df.resample("3h").agg({
+    "air_temperature": "mean",
+    "wind_speed": "mean",
+    "precipitation_amount": "sum"
+})
 
-df_weather.to_csv('current_weather_forecast.csv', index=False)
+# interpoler manglande verdiar
+df["air_temperature"] = df["air_temperature"].interpolate()
+df["wind_speed"] = df["wind_speed"].interpolate()
+
+# fordel nedbør dersom 6-timars data
+df["precipitation_amount"] = df["precipitation_amount"].fillna(0)
+
+# ---------------------------------------
+# FORMAT
+# ---------------------------------------
+
+df = df.reset_index().rename(columns={"time": "ds"})
+
+df.to_csv("current_weather_forecast.csv", index=False)
 
 print("✅ Ferdig!")

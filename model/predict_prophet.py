@@ -61,7 +61,7 @@ predictions["yhat"] = np.expm1(predictions["yhat"])  # exp(yhat) - 1
 predictions["yhat"] = predictions["yhat"].clip(lower=0)
 predictions["yhat"] = predictions["yhat"].round().astype(int)
 
-#print(predictions)
+print(predictions)
 
 predictions.to_csv(f"predictions.csv", index=False, sep=',')
 
@@ -71,9 +71,8 @@ history = pd.read_csv("https://raw.githubusercontent.com/jensmorten/sykkelprofet
 start=predictions['ds'].min().date()+ timedelta(weeks=-52)
 end = predictions['ds'].max().date()+ timedelta(weeks=-52)
 
-
-print(start)
-print(end)
+#print(start)
+#print(end)
 
 history = history[history['ds'].dt.date >start]
 history = history[history['ds'].dt.date <end]
@@ -92,4 +91,4 @@ history = pd.DataFrame({
     "vind (m/s)" : history['wind_speed']
 })
 
-print(history)
+#print(history)
