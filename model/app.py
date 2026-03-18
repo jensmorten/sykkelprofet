@@ -76,7 +76,7 @@ fig.add_trace(
 # Predikert bruk
 fig.add_trace(
     go.Bar(
-        x=df["ds"],
+        x=df["label"],
         y=df["yhat"],
         name="Predikert",
         marker=dict(color="steelblue"),
@@ -88,7 +88,7 @@ fig.add_trace(
 # Temperatur
 fig.add_trace(
     go.Scatter(
-        x=df["ds"],
+        x=df["label"],
         y=df["temp"],
         mode="lines",
         name="Temperatur (°C)",
@@ -100,7 +100,7 @@ fig.add_trace(
 # Nedbør
 fig.add_trace(
     go.Bar(
-        x=df["ds"],
+        x=df["label"],
         y=df["rain"],
         name="Nedbør (mm)",
         yaxis="y2",
