@@ -36,7 +36,7 @@ fig.add_trace(
         y=df["yhat"],
         mode="lines+markers",
         name="Predikert turer",
-        line=dict(width=3, color="#1f77b4"),
+        opacity=0.1,
     )
 )
 
