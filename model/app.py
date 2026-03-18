@@ -47,8 +47,15 @@ df_last_year = df_hist[df_hist["year"] == last_year]
 # ⚠️ Bytt "count" dersom kolonnen heiter noko anna i datasettet ditt
 hist_col = "count" if "count" in df_last_year.columns else df_last_year.columns[-1]
 
+# Aggreger historiske data til "typisk dag"
+df_last_year_agg = (
+    df_last_year
+    .groupby(["week", "weekday"], as_index=False)[hist_col]
+    .mean()   # evt .sum() dersom det gir meir meining
+)
+
 df = df.merge(
-    df_last_year[["week", "weekday", hist_col]],
+    df_last_year_agg,
     on=["week", "weekday"],
     how="left"
 )
