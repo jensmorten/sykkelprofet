@@ -31,6 +31,7 @@ df = df.rename(columns={
 # -----------------------------
 # FEATURE ENGINEERING (MATCH "SAMME DAG I FJOR")
 # -----------------------------
+df["label"] = df["ds"].dt.strftime("%a %H")
 
 df["week"] = df["ds"].dt.isocalendar().week.astype(int)
 df["weekday"] = df["ds"].dt.weekday
@@ -61,6 +62,17 @@ df = df.rename(columns={"y": "last_year"})
 
 fig = go.Figure()
 
+# I fjor (samme dagstype)
+fig.add_trace(
+    go.Bar(
+        x=df["label"],
+        y=df["last_year"],
+        name="I fjor (samme ukedag)",
+        marker=dict(color="steelblue", opacity=0.4),
+        opacity=0.3,
+    )
+)
+
 # Predikert bruk
 fig.add_trace(
     go.Bar(
@@ -68,18 +80,10 @@ fig.add_trace(
         y=df["yhat"],
         name="Predikert",
         marker=dict(color="steelblue"),
+        opacity=0.9,
     )
 )
 
-# I fjor (samme dagstype)
-fig.add_trace(
-    go.Bar(
-        x=df["ds"],
-        y=df["last_year"],
-        name="I fjor (samme ukedag)",
-        marker=dict(color="steelblue", opacity=0.4),
-    )
-)
 
 # Temperatur
 fig.add_trace(
@@ -106,7 +110,7 @@ fig.add_trace(
 
 # Layout tweaks (🔥 viktig for tett visning)
 fig.update_layout(
-    barmode="group",
+    barmode="overlay",
     bargap=0.05,
     bargroupgap=0.0,
     height=500,
@@ -121,7 +125,8 @@ fig.update_layout(
 )
 
 # Fjern “tidsgap” → tettare stolper
-fig.update_xaxes(type="category")
+#fig.update_xaxes(type="category")
+fig.update_xaxes(tickangle=-30)
 
 st.plotly_chart(fig, use_container_width=True)
 
