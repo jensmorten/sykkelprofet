@@ -34,33 +34,26 @@ df = df.rename(columns={
 
 df["week"] = df["ds"].dt.isocalendar().week.astype(int)
 df["weekday"] = df["ds"].dt.weekday
-df["year"] = df["ds"].dt.year
+df["hour"] = df["ds"].dt.hour
 
 df_hist["week"] = df_hist["ds"].dt.isocalendar().week.astype(int)
 df_hist["weekday"] = df_hist["ds"].dt.weekday
+df_hist["hour"] = df_hist["ds"].dt.hour
 df_hist["year"] = df_hist["ds"].dt.year
 
-# Finn siste år i historiske data (typisk 2025)
+# Finn siste år i historikk
 last_year = df_hist["year"].max()
+
 df_last_year = df_hist[df_hist["year"] == last_year]
 
-# ⚠️ Bytt "count" dersom kolonnen heiter noko anna i datasettet ditt
-hist_col = "count" if "count" in df_last_year.columns else df_last_year.columns[-1]
-
-# Aggreger historiske data til "typisk dag"
-df_last_year_agg = (
-    df_last_year
-    .groupby(["week", "weekday"], as_index=False)[hist_col]
-    .mean()   # evt .sum() dersom det gir meir meining
-)
-
+# 🔥 HER er nøkkelen: bruk "y"
 df = df.merge(
-    df_last_year_agg,
-    on=["week", "weekday"],
+    df_last_year[["week", "weekday", "hour", "y"]],
+    on=["week", "weekday", "hour"],
     how="left"
 )
 
-df = df.rename(columns={hist_col: "last_year"})
+df = df.rename(columns={"y": "last_year"})
 
 # -----------------------------
 # PLOTT
