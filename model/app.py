@@ -34,7 +34,6 @@ fig.add_trace(
     go.Bar(
         x=df["ds"],
         y=df["yhat"],
-        mode="lines+markers",
         name="Predikert turer",
         opacity=0.1,
     )
