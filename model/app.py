@@ -31,7 +31,7 @@ fig = go.Figure()
 # Bysykkelturer
 # -----------------------------
 fig.add_trace(
-    go.Scatter(
+    go.Bar(
         x=df["ds"],
         y=df["yhat"],
         mode="lines+markers",
