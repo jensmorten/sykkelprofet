@@ -35,7 +35,7 @@ fig.add_trace(
         x=df["ds"],
         y=df["yhat"],
         name="Predikert turer",
-        opacity=0.1,
+        opacity=0.9,
     )
 )
 
