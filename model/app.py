@@ -10,7 +10,14 @@ st.title("🚲 Prognose for bysykkelbruk i Trondheim")
 # LES DATA
 # -----------------------------
 
-df = pd.read_csv("https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv")
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv"
+)
+
+df_hist = pd.read_csv(
+    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/data/bysykkel_history2018-2025.csv",
+    parse_dates=["ds"]
+)
 
 df["ds"] = pd.to_datetime(df["ds"])
 
@@ -22,26 +29,59 @@ df = df.rename(columns={
 })
 
 # -----------------------------
-# HOVEDPLOT
+# FEATURE ENGINEERING (MATCH "SAMME DAG I FJOR")
+# -----------------------------
+
+df["week"] = df["ds"].dt.isocalendar().week.astype(int)
+df["weekday"] = df["ds"].dt.weekday
+df["year"] = df["ds"].dt.year
+
+df_hist["week"] = df_hist["ds"].dt.isocalendar().week.astype(int)
+df_hist["weekday"] = df_hist["ds"].dt.weekday
+df_hist["year"] = df_hist["ds"].dt.year
+
+# Finn siste år i historiske data (typisk 2025)
+last_year = df_hist["year"].max()
+df_last_year = df_hist[df_hist["year"] == last_year]
+
+# ⚠️ Bytt "count" dersom kolonnen heiter noko anna i datasettet ditt
+hist_col = "count" if "count" in df_last_year.columns else df_last_year.columns[-1]
+
+df = df.merge(
+    df_last_year[["week", "weekday", hist_col]],
+    on=["week", "weekday"],
+    how="left"
+)
+
+df = df.rename(columns={hist_col: "last_year"})
+
+# -----------------------------
+# PLOTT
 # -----------------------------
 
 fig = go.Figure()
 
-# -----------------------------
-# Bysykkelturer
-# -----------------------------
+# Predikert bruk
 fig.add_trace(
     go.Bar(
         x=df["ds"],
         y=df["yhat"],
-        name="Predikert turer",
-        opacity=0.9,
+        name="Predikert",
+        marker=dict(color="steelblue"),
     )
 )
 
-# -----------------------------
+# I fjor (samme dagstype)
+fig.add_trace(
+    go.Bar(
+        x=df["ds"],
+        y=df["last_year"],
+        name="I fjor (samme ukedag)",
+        marker=dict(color="steelblue", opacity=0.4),
+    )
+)
+
 # Temperatur
-# -----------------------------
 fig.add_trace(
     go.Scatter(
         x=df["ds"],
@@ -53,32 +93,35 @@ fig.add_trace(
     )
 )
 
-# -----------------------------
 # Nedbør
-# -----------------------------
 fig.add_trace(
     go.Bar(
         x=df["ds"],
         y=df["rain"],
         name="Nedbør (mm)",
         yaxis="y2",
-        opacity=0.4,
+        opacity=0.3,
     )
 )
 
+# Layout tweaks (🔥 viktig for tett visning)
 fig.update_layout(
+    barmode="group",
+    bargap=0.05,
+    bargroupgap=0.0,
     height=500,
     hovermode="x unified",
     xaxis_title="Tid",
-    yaxis=dict(
-        title="Bysykkelturer",
-    ),
+    yaxis=dict(title="Bysykkelturer"),
     yaxis2=dict(
         title="Temperatur / Nedbør",
         overlaying="y",
         side="right",
     ),
 )
+
+# Fjern “tidsgap” → tettare stolper
+fig.update_xaxes(type="category")
 
 st.plotly_chart(fig, use_container_width=True)
 
