@@ -92,7 +92,7 @@ fig.add_trace(
         x=df["label"],
         y=df["temp"],
         mode="lines",
-        name="Temperatur (°C)",
+        name="Varsla Temperatur (°C)",
         yaxis="y2",
         line=dict(dash="dot", color="orange"),
     )
@@ -103,7 +103,7 @@ fig.add_trace(
     go.Bar(
         x=df["label"],
         y=df["rain"],
-        name="Nedbør (mm)",
+        name="Varsla Nedbør (mm)",
         yaxis="y2",
         opacity=0.3,
     )
@@ -145,13 +145,13 @@ with col1:
 
 with col2:
     st.metric(
-        "Gjennomsnitt temperatur",
+        "Varsla gjennomsnitt-temperatur",
         f"{df['temp'].mean():.1f} °C"
     )
 
 with col3:
     st.metric(
-        "Total nedbør",
+        "Varsla total nedbør",
         f"{df['rain'].sum():.1f} mm"
     )
 
