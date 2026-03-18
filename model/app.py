@@ -32,7 +32,7 @@ df = df.rename(columns={
 # FEATURE ENGINEERING (MATCH "SAMME DAG I FJOR")
 # -----------------------------
 #df["label"] = df["ds"].dt.strftime("%a %H")
-df["label"] = df["ds"].dt.strftime("%d.%m.%y %H")
+df["label"] = df["ds"].dt.strftime("%d.%m.%y %H:%M")
 
 df["week"] = df["ds"].dt.isocalendar().week.astype(int)
 df["weekday"] = df["ds"].dt.weekday
