@@ -134,21 +134,9 @@ fig.update_xaxes(tickangle=-30)
 
 
 
-fig2 = go.Figure(go.Waterfall(
-    x=["Trend", "Sesong", "Vær", "Totalt"],
-    y=[
-        row["effect_trend"],
-        row["effect_seasonality"],
-        row["effect_weather"],
-        row["yhat"]
-    ],
-    measure=["relative", "relative", "relative", "total"]
-))
 
-fig2.update_layout(
-    title="Kva driv prognosen?",
-    height=400
-)
+
+
 
 col1, col2 = st.columns([2, 1])
 
@@ -156,9 +144,7 @@ with col1:
     st.plotly_chart(fig, width="stretch")
 
 with col2:
-    st.plotly_chart(fig2, width="content")
     st.markdown("## 🔍 Forklaring av prognose")
-
     selected_label = st.selectbox(
     "Velg tidspunkt",
     df["label"]
@@ -172,6 +158,24 @@ with col2:
     col2.metric("Sesong", row["effect_seasonality"])
     col3.metric("Vær", row["effect_weather"])
     col4.metric("Totalt", row["yhat"])
+
+    fig2 = go.Figure(go.Waterfall(
+    x=["Trend", "Sesong", "Vær", "Totalt"],
+    y=[
+        row["effect_trend"],
+        row["effect_seasonality"],
+        row["effect_weather"],
+        row["yhat"]
+    ],
+    measure=["relative", "relative", "relative", "total"]
+    ))
+
+    st.plotly_chart(fig2, width="content")
+    fig2.update_layout(
+    title="Kva driv prognosen?",
+    height=400
+)
+
 
 
 
