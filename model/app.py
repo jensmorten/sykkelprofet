@@ -32,12 +32,13 @@ df = df.rename(columns={
 ####
 start_train=df_hist["ds"].min().strftime("%d.%m.%y")
 end_train=df_hist["ds"].max().strftime("%d.%m.%y")
+count_trips=df_hist.count()
 
 start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
 
 st.markdown(f"""
-Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  og er trent på historiske data fra {start_train} til {end_train}.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""", unsafe_allow_html=True
+Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  og er trent på historiske data fra {start_train} til {end_train} og totalt {count_trips} bysykkel-turer.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""", unsafe_allow_html=True
 )
 
 
