@@ -32,7 +32,7 @@ df = df.rename(columns={
 ####
 start_train=df_hist["ds"].min().strftime("%d.%m.%y")
 end_train=df_hist["ds"].max().strftime("%d.%m.%y")
-count_trips=df_hist.count()
+count_trips=df_hist["y"].sum()
 
 start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
