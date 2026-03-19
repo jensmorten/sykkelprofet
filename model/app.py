@@ -172,29 +172,29 @@ st.plotly_chart(fig2, use_container_width=True)
 # NØKKELTALL
 # -----------------------------
 
-col1, col2, col3 = st.columns(3)
+#col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.metric(
-        "Maks forventet bruk",
-        int(df["yhat"].max())
-    )
+#with col1:
+#st.metric(
+#        "Maks forventet bruk",
+#        int(df["yhat"].max())
+#    )
 
-with col2:
-    st.metric(
-        "Varsla gjennomsnitt-temperatur",
-        f"{df['temp'].mean():.1f} °C"
-    )
+#with col2:
+#    st.metric(
+#        "Varsla gjennomsnitt-temperatur",
+#        f"{df['temp'].mean():.1f} °C"
+#    )
 
-with col3:
-    st.metric(
-        "Varsla total nedbør",
-        f"{df['rain'].sum():.1f} mm"
-    )
+#with col3:
+#    st.metric(
+#        "Varsla total nedbør",
+#        f"{df['rain'].sum():.1f} mm"
+#    )
 
 # -----------------------------
 # TABELL
 # -----------------------------
 
-with st.expander("Se rådata"):
-    st.dataframe(df)
+#with st.expander("Se rådata"):
+#    st.dataframe(df)
