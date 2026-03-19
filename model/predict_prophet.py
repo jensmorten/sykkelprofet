@@ -109,6 +109,6 @@ predictions["effect_weather"] = (
 )
 
 
-print(predictions.head(5))
+print(predictions)
 
-predictions.to_csv(f"predictions.csv", index=False, sep=',')
+#predictions.to_csv(f"predictions.csv", index=False, sep=',')
