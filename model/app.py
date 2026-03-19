@@ -37,7 +37,7 @@ start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
 
 st.markdown(f"""
-Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  og er trent på historiske data fra **{start_train} til {end_train}**.  Prediksjonen er oppdatert **{start_pred}**  og inneholder prognoser fram til **{end_pred}**.""", unsafe_allow_html=True
+Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  og er trent på historiske data fra {start_train} til {end_train}.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""", unsafe_allow_html=True
 )
 
 
