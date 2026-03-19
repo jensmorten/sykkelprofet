@@ -133,11 +133,6 @@ fig.update_xaxes(tickangle=-30)
 #st.plotly_chart(fig, width="stretch")
 
 
-
-
-
-
-
 col1, col2 = st.columns([2, 1])
 
 with col1:
