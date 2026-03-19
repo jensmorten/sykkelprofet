@@ -133,22 +133,6 @@ fig.update_xaxes(tickangle=-30)
 #st.plotly_chart(fig, width="stretch")
 
 
-st.markdown("## 🔍 Forklaring av prognose")
-
-selected_label = st.selectbox(
-    "Velg tidspunkt",
-    df["label"]
-)
-
-row = df[df["label"] == selected_label].iloc[0]
-
-col1, col2, col3, col4 = st.columns(4)
-
-col1.metric("Trend", row["effect_trend"])
-col2.metric("Sesong", row["effect_seasonality"])
-col3.metric("Vær", row["effect_weather"])
-col4.metric("Totalt", row["yhat"])
-
 
 fig2 = go.Figure(go.Waterfall(
     x=["Trend", "Sesong", "Vær", "Totalt"],
@@ -173,6 +157,24 @@ with col1:
 
 with col2:
     st.plotly_chart(fig2, width="content")
+    st.markdown("## 🔍 Forklaring av prognose")
+
+    selected_label = st.selectbox(
+    "Velg tidspunkt",
+    df["label"]
+    )
+
+    row = df[df["label"] == selected_label].iloc[0]
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric("Trend", row["effect_trend"])
+    col2.metric("Sesong", row["effect_seasonality"])
+    col3.metric("Vær", row["effect_weather"])
+    col4.metric("Totalt", row["yhat"])
+
+
+
 
 # -----------------------------
 # NØKKELTALL
