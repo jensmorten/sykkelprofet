@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 
+
 st.set_page_config(page_title="Prognose for bysykkelbruk i Trondheim", layout="wide")
 
 st.title("🚲 Prognose for bysykkelbruk i Trondheim")
@@ -130,6 +131,42 @@ fig.update_layout(
 fig.update_xaxes(tickangle=-30)
 
 st.plotly_chart(fig, use_container_width=True)
+
+
+st.markdown("## 🔍 Forklaring av prognose")
+
+selected_label = st.selectbox(
+    "Vel tidspunkt",
+    df["label"]
+)
+
+row = df[df["label"] == selected_label].iloc[0]
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Trend", row["effect_trend"])
+col2.metric("Sesong", row["effect_seasonality"])
+col3.metric("Vær", row["effect_weather"])
+col4.metric("Totalt", row["yhat"])
+
+
+fig2 = go.Figure(go.Waterfall(
+    x=["Trend", "Sesong", "Vær", "Totalt"],
+    y=[
+        row["effect_trend"],
+        row["effect_seasonality"],
+        row["effect_weather"],
+        row["yhat"]
+    ],
+    measure=["relative", "relative", "relative", "total"]
+))
+
+fig2.update_layout(
+    title="Kva driv prognosen?",
+    height=400
+)
+
+st.plotly_chart(fig2, use_container_width=True)
 
 # -----------------------------
 # NØKKELTALL
