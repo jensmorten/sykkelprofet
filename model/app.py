@@ -30,13 +30,20 @@ df = df.rename(columns={
 })
 
 ####
-start_train=df_hist["ds"].min().strftime("%d.%m.%y %H:%M")
-end_train=df_hist["ds"].max().strftime("%d.%m.%y %H:%M")
+start_train=df_hist["ds"].min().strftime("%d.%m.%y")
+end_train=df_hist["ds"].max().strftime("%d.%m.%y")
 
 start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
 
-st.markdown(f""" Prediksjonmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a> og er trena på historiske data fra {start_train} til {end_pred}. Prediksjonen er oppdatert {start_pred} og inneholder prediskjon for tidspunkter fram til {end_pred} """)
+st.markdown(f"""
+Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  
+og er trent på historiske data fra **{start_train} til {end_train}**.  
+
+Prediksjonen er oppdatert **{start_pred}**  
+og inneholder prognoser fram til **{end_pred}**.
+""", unsafe_allow_html=True)
+
 
 # -----------------------------
 # FEATURE ENGINEERING (MATCH "SAMME DAG I FJOR")
