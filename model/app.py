@@ -81,7 +81,7 @@ fig.add_trace(
     go.Bar(
         x=df["label"],
         y=df["last_year"],
-        name="I fjor (samme ukedag)",
+        name="Antall turer i fjor",
         marker=dict(color="steelblue", opacity=0.4),
         opacity=0.3,
     )
@@ -92,7 +92,7 @@ fig.add_trace(
     go.Bar(
         x=df["label"],
         y=df["yhat"],
-        name="Predikert",
+        name="Predikert antall turer i år",
         marker=dict(color="steelblue"),
         opacity=0.9,
     )
