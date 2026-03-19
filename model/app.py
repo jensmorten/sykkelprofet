@@ -192,7 +192,7 @@ Prognosen er laget med <a href="https://facebook.github.io/prophet/">Prophet</a>
 Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk og berika med vær-data fra <a href="https://meteostat.net/en/">Meteostat</a>. 
 
 **Kildekode og metode**  
-Se GitHub for detaljer om datagrunnlag, modell og implementasjon: https://github.com/jensmorten/sykkelprofet, 
+Se GitHub for detaljer om datagrunnlag, modell og implementasjon: https://github.com/jensmorten/sykkelprofet 
             
 """,
 unsafe_allow_html=True) 
