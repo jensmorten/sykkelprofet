@@ -153,9 +153,7 @@ with col2:
     **Trend**: {row["effect_trend"]:+}  
     **+ Sesong**: {row["effect_seasonality"]:+}  
     **+ Vær**: {row["effect_weather"]:+}  
-
-    ---
-    ## = {row["yhat"]}
+    **= Totalt: {row["yhat"]}
     """)
 
     fig2 = go.Figure(go.Waterfall(
