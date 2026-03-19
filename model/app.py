@@ -130,13 +130,13 @@ fig.update_layout(
 #fig.update_xaxes(type="category")
 fig.update_xaxes(tickangle=-30)
 
-st.plotly_chart(fig, width="stretch")
+#st.plotly_chart(fig, width="stretch")
 
 
 st.markdown("## 🔍 Forklaring av prognose")
 
 selected_label = st.selectbox(
-    "Vel tidspunkt",
+    "Velg tidspunkt",
     df["label"]
 )
 
@@ -166,7 +166,13 @@ fig2.update_layout(
     height=400
 )
 
-st.plotly_chart(fig2, width="content")
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.plotly_chart(fig, width="stretch")
+
+with col2:
+    st.plotly_chart(fig2, width="content")
 
 # -----------------------------
 # NØKKELTALL
