@@ -30,8 +30,8 @@ df = df.rename(columns={
 })
 
 ####
-#start_train=df_hist["ds"].min().dt.strftime("%d.%m.%y %H:%M")
-#end_train=df_hist["ds"].max().dt.strftime("%d.%m.%y %H:%M")
+start_train=df_hist["ds"].min()[0].dt.strftime("%d.%m.%y %H:%M")
+end_train=df_hist["ds"].max()[0].dt.strftime("%d.%m.%y %H:%M")
 
 start_pred=df["ds"].min().dt.strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().dt.strftime("%d.%m.%y %H:%M")
