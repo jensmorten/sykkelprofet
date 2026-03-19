@@ -149,12 +149,13 @@ with col2:
 
     st.markdown("### Forklaring av prognose")
 
-    st.code(f"""
-    Trend        {row["effect_trend"]:+}
-    + Sesong     {row["effect_seasonality"]:+}
-    + Vær        {row["effect_weather"]:+}
-    --------------------------
-    Totalt       {row["yhat"]}
+    st.markdown(f"""
+    **Trend**: {row["effect_trend"]:+}  
+    **+ Sesong**: {row["effect_seasonality"]:+}  
+    **+ Vær**: {row["effect_weather"]:+}  
+
+    ---
+    ## = {row["yhat"]}
     """)
 
     fig2 = go.Figure(go.Waterfall(
