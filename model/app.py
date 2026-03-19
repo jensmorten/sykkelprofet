@@ -147,8 +147,6 @@ with col2:
 
     row = df[df["label"] == selected_label].iloc[0]
 
-    st.markdown("### Forklaring av prognose")
-
     st.markdown(f"""
     **Trend**: {row["effect_trend"]:+}  
     **+ Sesong**: {row["effect_seasonality"]:+}  
