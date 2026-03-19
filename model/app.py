@@ -105,7 +105,7 @@ fig.add_trace(
         x=df["label"],
         y=df["temp"],
         mode="lines",
-        name="Varsla Temperatur (°C)",
+        name="Varsla temperatur (°C)",
         yaxis="y2",
         line=dict(dash="dot", color="orange"),
     )
@@ -116,7 +116,7 @@ fig.add_trace(
     go.Bar(
         x=df["label"],
         y=df["rain"],
-        name="Varsla Nedbør (mm)",
+        name="Varsla nedbør (mm)",
         yaxis="y2",
         opacity=0.3,
     )
@@ -132,7 +132,7 @@ fig.update_layout(
     xaxis_title="Tid",
     yaxis=dict(title="Bysykkelturer"),
     yaxis2=dict(
-        title="Temperatur / Nedbør",
+        title="Temperatur / nedbør",
         overlaying="y",
         side="right",
     ),
@@ -189,10 +189,10 @@ st.markdown("---")
 st.markdown("""
 **Om modellen**  
 Prognosen er laget med <a href="https://facebook.github.io/prophet/">Prophet</a> og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
-Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk
+Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk og berika med vær-data fra <a href="https://meteostat.net/en/">Meteostat</a>. 
 
 **Kildekode og metode**  
 Se GitHub for detaljer om datagrunnlag, modell og implementasjon: https://github.com/jensmorten/sykkelprofet, 
             
 """,
-unsafe_allow_html=True)
+unsafe_allow_html=True) 
