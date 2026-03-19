@@ -38,7 +38,7 @@ start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
 
 st.markdown(f"""
-Prediksjonsmodellen er trent på historiske data fra {start_train} til {end_train} og totalt {count_trips} bysykkel-turer.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""")
+Prediksjonsmodellen er trent på historiske data fra {start_train} til {end_train}, totalt {count_trips} bysykkel-turer.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""")
 
 
 # -----------------------------
