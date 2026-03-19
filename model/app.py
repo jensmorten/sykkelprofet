@@ -151,7 +151,7 @@ with col1:
     st.plotly_chart(fig, width="stretch")
 
 with col2:
-    st.markdown("#### 🔍 Forklaring av prognose")
+    st.markdown("##### Forklaring av prognose")
     selected_label = st.selectbox(
     "Velg tidspunkt",
     df["label"]
@@ -160,10 +160,10 @@ with col2:
     row = df[df["label"] == selected_label].iloc[0]
 
     st.markdown(f"""
-    **Trend**: {row["effect_trend"]:+}  
-    **+ Sesong**: {row["effect_seasonality"]:+}  
-    **+ Vær**: {row["effect_weather"]:+}  
-    **= Totalt**: {row["yhat"]}
+    **Generell Trend-effekt**: {row["effect_trend"]:+}  
+    **+ Sesong-effekt (ukedag, måned, år) **: {row["effect_seasonality"]:+}  
+    **+ Vær-effekt**: {row["effect_weather"]:+}  
+    **= Gir samla prediksjon**: {row["yhat"]}
     """)
 
     fig2 = go.Figure(go.Waterfall(
