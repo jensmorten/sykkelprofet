@@ -185,36 +185,14 @@ with col2:
     #)
 
 
+st.markdown("---")
 
+st.markdown("""
+**Om modellen**  
+Prognosen er laget med Facebook Prophet og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
+Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time.
 
-
-# -----------------------------
-# NØKKELTALL
-# -----------------------------
-
-#col1, col2, col3 = st.columns(3)
-
-#with col1:
-#st.metric(
-#        "Maks forventet bruk",
-#        int(df["yhat"].max())
-#    )
-
-#with col2:
-#    st.metric(
-#        "Varsla gjennomsnitt-temperatur",
-#        f"{df['temp'].mean():.1f} °C"
-#    )
-
-#with col3:
-#    st.metric(
-#        "Varsla total nedbør",
-#        f"{df['rain'].sum():.1f} mm"
-#    )
-
-# -----------------------------
-# TABELL
-# -----------------------------
-
-#with st.expander("Se rådata"):
-#    st.dataframe(df)
+**Kildekode og metode**  
+Se GitHub for detaljer om datagrunnlag, modell og implementasjon:  
+👉 https://github.com/jensmorten/sykkelprofet
+""")
