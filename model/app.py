@@ -190,7 +190,7 @@ st.markdown("---")
 st.markdown("""
 **Om modellen**  
 Prognosen er laget med Facebook Prophet og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
-Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time.
+Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk
 
 **Kildekode og metode**  
 Se GitHub for detaljer om datagrunnlag, modell og implementasjon:  
