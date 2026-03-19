@@ -147,12 +147,15 @@ with col2:
 
     row = df[df["label"] == selected_label].iloc[0]
 
-    col1, col2, col3, col4 = st.columns(4)
+    st.markdown("### Forklaring av prognose")
 
-    col1.metric("Trend", row["effect_trend"])
-    col2.metric("Sesong", row["effect_seasonality"])
-    col3.metric("Vær", row["effect_weather"])
-    col4.metric("Totalt", row["yhat"])
+    st.code(f"""
+    Trend        {row["effect_trend"]:+}
+    + Sesong     {row["effect_seasonality"]:+}
+    + Vær        {row["effect_weather"]:+}
+    --------------------------
+    Totalt       {row["yhat"]}
+    """)
 
     fig2 = go.Figure(go.Waterfall(
     x=["Trend", "Sesong", "Vær", "Totalt"],
