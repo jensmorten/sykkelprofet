@@ -12,7 +12,7 @@ st.title("🚲 Prognose for bysykkelbruk i Trondheim")
 # -----------------------------
 
 df = pd.read_csv(
-    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv"
+    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv", parse_dates=["ds"]
 )
 
 df_hist = pd.read_csv(
@@ -30,8 +30,8 @@ df = df.rename(columns={
 })
 
 ####
-#start_train=df_hist["ds"].min().dt.strftime("%d.%m.%y %H:%M")
-#end_train=df_hist["ds"].max().dt.strftime("%d.%m.%y %H:%M")
+start_train=df_hist["ds"].min().dt.strftime("%d.%m.%y %H:%M")
+end_train=df_hist["ds"].max().dt.strftime("%d.%m.%y %H:%M")
 
 start_pred=df["ds"].min().dt.strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().dt.strftime("%d.%m.%y %H:%M")
