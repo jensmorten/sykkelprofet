@@ -168,7 +168,7 @@ with col2:
     st.plotly_chart(fig2, width="content")
     fig2.update_layout(
     title="Kva driv prognosen?",
-    height=400
+    height=250
 )
 
 
