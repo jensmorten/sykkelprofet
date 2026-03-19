@@ -38,7 +38,7 @@ start_pred=df["ds"].min().strftime("%d.%m.%y %H:%M")
 end_pred=df["ds"].max().strftime("%d.%m.%y %H:%M")
 
 st.markdown(f"""
-Prediksjonsmodellen er basert på <a href="https://facebook.github.io/prophet/">Prophet</a>  og er trent på historiske data fra {start_train} til {end_train} og totalt {count_trips} bysykkel-turer.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""", unsafe_allow_html=True
+Prediksjonsmodellen er trent på historiske data fra {start_train} til {end_train} og totalt {count_trips} bysykkel-turer.  Prediksjonen er oppdatert {start_pred}  og inneholder prognoser fram til {end_pred}.""")
 )
 
 
@@ -189,10 +189,11 @@ st.markdown("---")
 
 st.markdown("""
 **Om modellen**  
-Prognosen er laget med Facebook Prophet og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
+Prognosen er laget med <a href="https://facebook.github.io/prophet/">Prophet</a> og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
 Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk
 
 **Kildekode og metode**  
-Se GitHub for detaljer om datagrunnlag, modell og implementasjon:  
-👉 https://github.com/jensmorten/sykkelprofet
-""")
+Se GitHub for detaljer om datagrunnlag, modell og implementasjon: https://github.com/jensmorten/sykkelprofet, 
+            
+""",
+unsafe_allow_html=True)
