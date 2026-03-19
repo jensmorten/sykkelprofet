@@ -161,7 +161,7 @@ with col2:
 
     st.markdown(f"""
     **Generell Trend-effekt**: {row["effect_trend"]:+}  
-    **+ Sesong-effekt (ukedag, måned, år) **: {row["effect_seasonality"]:+}  
+    **+ Sesong-effekt (ukedag, måned, år)**: {row["effect_seasonality"]:+}  
     **+ Vær-effekt**: {row["effect_weather"]:+}  
     **= Gir samla prediksjon**: {row["yhat"]}
     """)
