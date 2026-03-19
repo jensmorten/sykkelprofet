@@ -161,7 +161,7 @@ with col2:
 
     st.markdown(f"""
     **Generell Trend-effekt**: {row["effect_trend"]:+}  
-    **+ Sesong-effekt (ukedag, måned, år)**: {row["effect_seasonality"]:+}  
+    **+ Sesong-effekt (tidspunkt, ukedag, måned, år)**: {row["effect_seasonality"]:+}  
     **+ Vær-effekt**: {row["effect_weather"]:+}  
     **= Gir totalt predikert antall turer for 3 timer etter {selected_label}**: {row["yhat"]}
     """)
