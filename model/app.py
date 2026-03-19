@@ -139,7 +139,7 @@ with col1:
     st.plotly_chart(fig, width="stretch")
 
 with col2:
-    st.markdown("### 🔍 Forklaring av prognose")
+    st.markdown("#### 🔍 Forklaring av prognose")
     selected_label = st.selectbox(
     "Velg tidspunkt",
     df["label"]
