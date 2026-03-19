@@ -165,11 +165,11 @@ with col2:
     measure=["relative", "relative", "relative", "total"]
     ))
 
-    st.plotly_chart(fig2, width="content")
-    fig2.update_layout(
-    title="Kva driv prognosen?",
-    height=250
-)
+    #st.plotly_chart(fig2, width="content")
+    #fig2.update_layout(
+    #title="Kva driv prognosen?",
+    #height=250
+    #)
 
 
 
