@@ -190,6 +190,7 @@ st.markdown("""
 **Om modellen**  
 Prognosen er laget med <a href="https://facebook.github.io/prophet/">Prophet</a> og kombinerer historiske mønstre i bysykkelbruk med værdata (temperatur, nedbør og vind).  
 Modellen estimerer hvordan trend, sesong og vær påvirker etterspørselen time for time. Data er henta fra https://trondheimbysykkel.no/apne-data/historisk og berika med vær-data fra <a href="https://meteostat.net/en/">Meteostat</a>. 
+Værvarsel fram i tid er henta fra >a href="https://api.met.no/weatherapi/">Meteorologisk institutt</a>. 
 
 **Kildekode og metode**  
 Se GitHub for detaljer om datagrunnlag, modell og implementasjon: https://github.com/jensmorten/sykkelprofet 
