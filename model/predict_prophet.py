@@ -111,4 +111,4 @@ predictions["effect_weather"] = (
 
 print(predictions)
 
-#predictions.to_csv(f"predictions.csv", index=False, sep=',')
+predictions.to_csv(f"predictions.csv", index=False, sep=',')

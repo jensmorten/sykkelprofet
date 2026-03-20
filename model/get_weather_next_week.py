@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 
 config.block_large_requests = False
 STATION_ID = "01257"
+#STATION_ID = "01272"re
+
 
 start = datetime.now()
 end = start + timedelta(days=7)
@@ -24,6 +26,8 @@ df = hourly(STATION_ID, start, end).fetch()
 
 if df.empty:
     raise RuntimeError("Ingen værdata returnert fra Meteostat")
+
+#print(df)
 
 # ---------------------------------------
 # RYDD
@@ -64,6 +68,8 @@ df["precipitation_amount"] = df["precipitation_amount"].fillna(0)
 
 df = df.reset_index().rename(columns={"time": "ds"})
 
-df.to_csv("current_weather_forecast.csv", index=False)
+#df.to_csv("current_weather_forecast.csv", index=False)
+
+print(df)
 
 print("✅ Ferdig!")
