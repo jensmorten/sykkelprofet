@@ -9,11 +9,13 @@ print("modell og data for prediksjon...")
 with open('prophet_model.json', 'r') as fin:
     m = model_from_json(json.load(fin))
 
-pred = pd.read_csv("https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/current_weather_forecast.csv", parse_dates=["ds"])
+#pred = pd.read_csv("https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/current_weather_forecast.csv", parse_dates=["ds"])
+pred=pd.read_csv("current_weather_forecast.csv", parse_dates=["ds"])
 pred["ds"] = pred["ds"].dt.tz_localize(None)
 
 pred = pred.sort_values("ds")
 
+print(pred)
 print("ferdig!")
 
 
