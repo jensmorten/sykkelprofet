@@ -1,0 +1,37 @@
+name: Daily prediction
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # kl 05:00 UTC (~07 norsk tid)
+  workflow_dispatch:       # kan køyrast manuelt også
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run weather script
+        run: python model/get_weather_next_week_met.py
+
+      - name: Run prediction
+        run: python model/predict_prophet.py
+
+      - name: Commit updated predictions
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add model/predictions.csv
+          git commit -m "Update predictions" || echo "No changes"
+          git push
