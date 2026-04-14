@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import requests
 
 
 st.set_page_config(page_title="Prognose for bysykkelbruk i Trondheim", layout="wide")
@@ -11,9 +12,14 @@ st.title("🚲 Prognose for bysykkelbruk i Trondheim")
 # LES DATA
 # -----------------------------
 
-df = pd.read_csv(
-    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv", parse_dates=["ds"]
-)
+api_url = "https://api.github.com/repos/jensmorten/sykkelprofet/commits/main"
+commit = requests.get(api_url).json()["sha"]
+url = f"https://raw.githubusercontent.com/jensmorten/sykkelprofet/{commit}/model/predictions.csv"
+df = pd.read_csv(url, parse_dates=["ds"])
+
+#df = pd.read_csv(
+#    "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/model/predictions.csv", parse_dates=["ds"]
+#)
 
 df_hist = pd.read_csv(
     "https://raw.githubusercontent.com/jensmorten/sykkelprofet/refs/heads/main/data/bysykkel_history2018-2025.csv",
