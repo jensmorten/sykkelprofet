@@ -15,7 +15,7 @@ pred["ds"] = pred["ds"].dt.tz_localize(None)
 
 pred = pred.sort_values("ds")
 
-print(pred)
+#print(pred)
 print("ferdig!")
 
 
