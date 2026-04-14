@@ -102,7 +102,7 @@ df = df[df.index <= now + pd.Timedelta(days=7)]
 
 df = df.reset_index()
 
-df.to_csv("current_weather_forecast.csv", index=False)
+df.to_csv("model/current_weather_forecast.csv", index=False)
 
 print(df)
 

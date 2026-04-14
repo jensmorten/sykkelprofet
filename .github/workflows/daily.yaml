@@ -2,36 +2,67 @@ name: Daily prediction
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # kl 05:00 UTC (~07 norsk tid)
-  workflow_dispatch:       # kan køyrast manuelt også
+    - cron: "0 5 * * *"   # 05:00 UTC (~07:00 norsk tid)
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  run-script:
+  run-pipeline:
     runs-on: ubuntu-latest
 
     steps:
+      # -----------------------------
+      # HENT REPO
+      # -----------------------------
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # -----------------------------
+      # PYTHON
+      # -----------------------------
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
+      # -----------------------------
+      # INSTALLER AVHENGIGHETER
+      # -----------------------------
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run weather script
+      # -----------------------------
+      # DEBUG (kan fjernast etterpå)
+      # -----------------------------
+      - name: Debug file structure
+        run: ls -R
+
+      # -----------------------------
+      # HENT VÆRDATA
+      # -----------------------------
+      - name: Get weather forecast
         run: python model/get_weather_next_week_met.py
 
+      # -----------------------------
+      # KJØR PROPHET
+      # -----------------------------
       - name: Run prediction
         run: python model/predict_prophet.py
 
-      - name: Commit updated predictions
+      # -----------------------------
+      # COMMIT RESULTAT
+      # -----------------------------
+      - name: Commit updated data
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+
+          git add model/current_weather_forecast.csv
           git add model/predictions.csv
-          git commit -m "Update predictions" || echo "No changes"
+
+          git commit -m "Update data $(date)" || echo "No changes"
           git push
