@@ -169,7 +169,7 @@ with col2:
     **Generell Trend-effekt**: {row["effect_trend"]:+}  
     **+ Sesong-effekt (tidspunkt, ukedag, måned, år)**: {row["effect_seasonality"]:+}  
     **+ Vær-effekt**: {row["effect_weather"]:+}  
-    **= Gir totalt predikert antall turer for 3 timer etter {selected_label}**: {row["yhat"]}
+    **= Gir totalt predikert antall turer for 3 timer etter {selected_label}**: {row["yhat"]}  
     **Sammenlignet med samme periode i fjor**: {int(row["last_year"]) if pd.notna(row["last_year"]) else "Ingen data"}
     """)
 
